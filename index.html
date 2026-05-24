@@ -473,7 +473,10 @@ else if(ev==='SIGNED_OUT'){cu=null;isAd=false;uiOut()}
 }
 
 async function doLogin(){
-if(!sb){toast('Configure Supabase first.','e');document.getElementById('cfgModal').classList.add('act');return}
+if(!C.su || !C.sk){
+console.log('Supabase missing');
+return;
+}
 var r=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:window.location.origin+window.location.pathname}});
 if(r.error)toast('Login failed: '+r.error.message,'e');
 }
